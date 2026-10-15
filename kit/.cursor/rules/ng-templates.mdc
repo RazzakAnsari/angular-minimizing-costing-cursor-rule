@@ -1,0 +1,20 @@
+---
+description: Angular HTML templates.
+globs: **/*.component.html
+alwaysApply: false
+---
+
+# Angular templates
+
+- Control flow: if the file uses `@if` / `@for` / `@switch`, keep using it.
+  If it uses `*ngIf` / `*ngFor`, keep that. Do not migrate a template unless
+  asked.
+- Every `@for` needs a `track` expression; every `*ngFor` on a list that
+  changes should have `trackBy`.
+- No function calls with real work in bindings - they run on every change
+  detection. Use a signal, `computed()`, a pipe, or a precomputed field.
+- Text the user sees goes through the translation pipe/attribute the project
+  uses. Do not hardcode new strings.
+- Keep accessibility: labels on inputs, `alt` on images, buttons for actions
+  (not clickable divs).
+- Show only the changed element and its parent tag, not the whole template.

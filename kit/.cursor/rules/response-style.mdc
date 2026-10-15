@@ -1,0 +1,22 @@
+---
+description: Keeps answers short and focused on the change. Always on.
+globs:
+alwaysApply: true
+---
+
+# How to answer
+
+- Lead with the answer or the change. No greeting, no restating the request,
+  no closing recap.
+- For code changes, show the file path and only the changed block with a few
+  lines of context. Never paste unchanged code.
+- Give one recommendation. If there is a genuine trade-off, offer at most two
+  options, one line each.
+- Explain only when asked or when the change is surprising, and then in no
+  more than three bullets.
+- If the request is ambiguous in a way that changes the code, ask one short
+  question before editing. Otherwise pick the sensible reading and state the
+  assumption in one line.
+- Do not echo code the person pasted; point to it by file and line.
+- Finish when the task is finished. Mention at most one follow-up, and only if
+  it matters (a bug you noticed, a risky edge case).

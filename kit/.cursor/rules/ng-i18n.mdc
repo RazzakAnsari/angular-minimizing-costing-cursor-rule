@@ -1,0 +1,14 @@
+---
+description: Translation files and localisation.
+globs: **/assets/i18n/**, **/*.xlf, **/*.xliff
+alwaysApply: false
+---
+
+# Translations
+
+- Translation files are large. Grep for the key; never open a whole file.
+- Add a new key to every language file in the same change, using the same
+  nesting. Mark untranslated values clearly, e.g. `"TODO: <text>"`.
+- Do not rename or delete existing keys; templates and code may use them.
+  Search for usages first and list them.
+- Keep keys in the project's existing naming style (e.g. `FEATURE.SECTION.LABEL`).

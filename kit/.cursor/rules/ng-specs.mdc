@@ -1,0 +1,17 @@
+---
+description: Angular unit tests.
+globs: **/*.spec.ts
+alwaysApply: false
+---
+
+# Specs
+
+- Write or change tests only when asked. Never run them yourself; name the
+  command instead, e.g. `ng test --include <file>.spec.ts --watch=false`.
+- Use the existing framework and helpers (Jasmine or Jest, TestBed setup,
+  shared mocks). Search for an existing spec of a similar class first.
+- Mock HTTP with `HttpTestingController` or the project's mock service; no
+  real network calls.
+- One behaviour per `it`. Clear names: "should show an error when ...".
+- Do not delete or skip (`xit`, `fdescribe`, `.skip`) failing tests to make a
+  suite pass. Report the failure instead.

@@ -1,0 +1,17 @@
+---
+description: General TypeScript in an Angular codebase.
+globs: **/*.ts
+alwaysApply: false
+---
+
+# TypeScript
+
+- No `any` in new code. Use a precise type, a generic, or `unknown` plus a
+  type guard.
+- Put shared interfaces in the existing models folder; search for an
+  existing type before creating a new one.
+- Prefer `readonly`, `const`, and optional chaining. Avoid non-null
+  assertions (`!`) unless the value is guaranteed and a comment says why.
+- Keep the existing import order and path aliases (e.g. `@app/...`).
+- Do not leave `console.log` behind. Use the project's logging service if it
+  has one.

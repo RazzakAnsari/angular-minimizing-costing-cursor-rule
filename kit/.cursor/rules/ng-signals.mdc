@@ -1,0 +1,19 @@
+---
+description: Writing or changing Angular signals, computed values, and effects.
+globs: **/*.ts
+alwaysApply: false
+---
+
+# Signals
+
+- Use `signal()` for local state, `computed()` for anything derived. Do not
+  store a derived value in a second writable signal.
+- Keep `effect()` for side effects that leave Angular (storage, logging,
+  third-party widgets). Do not set other signals inside an effect.
+- Update with `set()` or `update()` and return new arrays/objects; do not
+  mutate the current value in place.
+- Bridging RxJS: `toSignal()` / `toObservable()` from
+  `@angular/core/rxjs-interop`. Give `toSignal` an `initialValue` when the
+  template reads it immediately.
+- Only introduce signals where the file or feature already uses them, or
+  when asked.

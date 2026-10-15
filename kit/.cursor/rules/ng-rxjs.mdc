@@ -1,0 +1,18 @@
+---
+description: RxJS streams in Angular code.
+globs: **/*.ts
+alwaysApply: false
+---
+
+# RxJS
+
+- No nested `subscribe()`. Combine with `switchMap`, `concatMap`,
+  `mergeMap`, or `exhaustMap` and say why you picked that one in a few words.
+- Every manual subscription needs a teardown (`takeUntilDestroyed`, the
+  `async` pipe, or the file's existing pattern).
+- Handle errors with `catchError` close to the source and return a safe
+  fallback; do not swallow errors silently.
+- Prefer `shareReplay({ bufferSize: 1, refCount: true })` when several
+  consumers share one HTTP call.
+- Keep operator chains short and readable; extract a named function if a
+  `map` grows past a few lines.

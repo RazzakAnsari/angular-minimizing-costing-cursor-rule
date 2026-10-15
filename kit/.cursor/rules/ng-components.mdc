@@ -1,0 +1,21 @@
+---
+description: Angular component classes.
+globs: **/*.component.ts
+alwaysApply: false
+---
+
+# Angular components
+
+- Match the file's existing style: standalone with `imports: [...]`, or
+  declared in an NgModule. Do not convert one to the other unless asked.
+- New components: standalone, `ChangeDetectionStrategy.OnPush`, and
+  `inject()` for dependencies when the codebase already uses it; otherwise
+  follow the constructor-injection style around you.
+- Inputs and outputs: use `input()` / `output()` / `model()` only if the
+  project already does; otherwise `@Input()` / `@Output()`.
+- Keep components thin. Move HTTP calls and business rules into a service.
+- Clean up subscriptions with `takeUntilDestroyed()`, the `async` pipe, or
+  the pattern already used in the file. Do not mix patterns in one class.
+- When adding a field used by the template, show the template change in the
+  same reply.
+- Do not rename selectors, inputs, or outputs: other templates depend on them.

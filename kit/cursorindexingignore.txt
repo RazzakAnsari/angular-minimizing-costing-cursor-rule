@@ -1,0 +1,19 @@
+# Optional. Installed as .cursorindexingignore when you ask for it.
+# Keeps bulky or generated files out of Cursor's search index. You can still
+# @-mention any of them. This is not a security control.
+
+node_modules/
+.angular/
+.nx/
+dist/
+out-tsc/
+coverage/
+*.map
+*.min.js
+*.min.css
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+src/assets/i18n/*.json
+src/assets/fonts/
+src/assets/images/

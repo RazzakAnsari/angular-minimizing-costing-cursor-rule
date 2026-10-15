@@ -1,0 +1,32 @@
+---
+description: Limits wasted reads, searches, and commands. Always on.
+globs:
+alwaysApply: true
+---
+
+# Spend tool calls carefully
+
+## Finding code
+- Search before reading: grep for the class, selector, route path, method, or
+  translation key, then open only the matching range (about 40 lines).
+- For files longer than about 400 lines, never load the whole file. Read the
+  method or block you need.
+- Remember what you have already read in this chat. Do not reopen the same
+  range unless it has changed.
+- Do not list folders recursively from the project root. Go straight to the
+  feature folder you need.
+
+## Making edits
+- Group related edits to one file into a single edit.
+- Follow the style around you. Do not reformat lines you are not changing.
+
+## Checking your work
+- Do not run builds, tests, or linters after editing (see guardrails). End
+  with one line naming the check the person can run, for example
+  `npx tsc -p tsconfig.app.json --noEmit` or one spec file.
+- Unsure whether an API exists in this Angular version? Search
+  `package.json` for `@angular/core` instead of guessing.
+
+## When stuck
+- After two failed attempts at the same fix, stop. Summarise what you tried
+  and what you need from the person.

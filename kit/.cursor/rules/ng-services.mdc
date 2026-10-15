@@ -1,0 +1,21 @@
+---
+description: Services, interceptors, guards, and resolvers.
+globs: **/*.service.ts, **/*.interceptor.ts, **/*.guard.ts, **/*.resolver.ts
+alwaysApply: false
+---
+
+# Services and DI
+
+- `providedIn: 'root'` for app-wide services unless the file shows another
+  scope. Follow the injection style already used (`inject()` or constructor).
+- HTTP: type every response (`http.get<Thing>(...)`), map and handle errors
+  in the service, and return an Observable or signal to the caller.
+- Do not hardcode base URLs or hosts. Use the existing config or environment
+  token - and never open environment files yourself.
+- Big services (1000+ lines): grep for the method, read about 40 lines
+  around it, and add new methods next to related ones. Never reorganise the
+  file.
+- Interceptors, guards, and auth services count as sensitive: start the
+  reply with `CAUTION: SENSITIVE CODE`.
+- Do not change a public method's signature without listing its callers
+  first (search for the method name).

@@ -1,0 +1,17 @@
+---
+description: Component and global styles.
+globs: **/*.scss, **/*.sass, **/*.css
+alwaysApply: false
+---
+
+# Styles
+
+- Use the project's existing variables, mixins, and design tokens. Search for
+  them before writing a new colour, spacing, or breakpoint value.
+- Keep styles in the component stylesheet. Touch global files
+  (`styles.scss`, theme files) only when asked.
+- Avoid `::ng-deep` and `!important`. If one is truly needed, add a short
+  comment explaining why.
+- Keep selectors shallow (three levels at most). No IDs for styling.
+- Respect right-to-left layouts if the app supports them: prefer logical
+  properties such as `margin-inline-start`.

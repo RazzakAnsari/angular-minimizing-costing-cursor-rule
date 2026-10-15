@@ -1,0 +1,44 @@
+---
+description: Facts about this specific Angular project. Always on. Fill in the placeholders before use.
+globs:
+alwaysApply: true
+---
+
+# Project context (edit me)
+
+Replace every `<...>` placeholder with facts about your project, and delete
+lines that do not apply. Keep it short - this file is sent with every request.
+Never put URLs, hostnames, keys, tokens, passwords, or customer data here.
+
+## Stack
+- Angular version: `<e.g. 17.x>`
+- Component style: `<standalone / NgModules / mixed>`
+- State: `<signals / RxJS services / NgRx / mixed>`
+- UI kit: `<Angular Material / PrimeNG / Bootstrap / in-house>`
+- Styling: `<SCSS / CSS / Tailwind>`
+- Translations: `<ngx-translate / @angular/localize / none>`, languages `<en, ...>`
+- Unit tests: `<Jasmine + Karma / Jest>`
+
+## Where things live
+- App shell and providers: `src/app/app.config.ts` `<or app.module.ts>`
+- Shared services: `src/app/core/services/<area>`
+- Features: `src/app/features/<feature>/`
+- Shared UI: `src/app/shared/components/<component>`
+- Translation files: `src/assets/i18n/<lang>.json` - grep keys, never open whole files
+- Environments: `src/environments/` - off limits to the assistant
+
+## Shortcuts the assistant should know
+- Feature switches are read from `src/app/core/services/<feature-flags>.service.ts`;
+  search for the flag name before reading the file.
+- App configuration is loaded by `<config-loader>.service.ts` in `<methodName>()`;
+  code that depends on it runs after that call.
+- Large files: `<list files over ~1000 lines>` - always grep, never read whole.
+- `<add: HTTP wrapper, notification service, date helpers, shared pipes>`
+
+## Checks to suggest (the assistant names them; it does not run them)
+- Type check: `npx tsc -p tsconfig.app.json --noEmit`
+- Single spec: `ng test --include <path/to/file>.spec.ts --watch=false`
+
+## Off limits
+- `src/environments/**`, `angular.json`, `package.json`, `tsconfig*.json`
+- `<add: generated API clients, vendor code, legacy folders>`

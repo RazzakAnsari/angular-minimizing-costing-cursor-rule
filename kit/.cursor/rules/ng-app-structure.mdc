@@ -1,0 +1,17 @@
+---
+description: NgModules, routes, and application bootstrap.
+globs: **/*.module.ts, **/*.routes.ts, **/*-routing.module.ts, **/app.config.ts, **/main.ts
+alwaysApply: false
+---
+
+# Modules, routes, and bootstrap
+
+- Mixed apps are normal. Do not migrate NgModules to standalone, or the
+  reverse, unless asked.
+- New routes: lazy-load with `loadComponent` or `loadChildren`, matching the
+  existing route files.
+- Adding a provider in `app.config.ts`, `main.ts`, or a root module affects
+  the whole app: list it in the plan and wait for "go".
+- When a standalone component needs something, add it to that component's
+  `imports`, not to a shared module.
+- Route guards and resolvers are sensitive: flag them.
