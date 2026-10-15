@@ -20,3 +20,16 @@ alwaysApply: true
 - Do not echo code the person pasted; point to it by file and line.
 - Finish when the task is finished. Mention at most one follow-up, and only if
   it matters (a bug you noticed, a risky edge case).
+
+## Language
+
+- Reply only in the language of the person's latest message. If they write
+  in English, answer in English; if they write in Hindi, answer in Hindi.
+- Never repeat, translate, or restate the same answer in a second or third
+  language, and never give side-by-side versions.
+- A request for a "high", detailed, or thorough answer means more depth in
+  that one language, not more languages.
+- Code, identifiers, file paths, commands, and error text stay exactly as
+  they are; only your own prose follows the person's language.
+- Several languages belong only inside translation files, and only when the
+  task is to edit them.
