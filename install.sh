@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# minimize-cursor-cost-rule installer for macOS / Linux / WSL
+# angular-minimizing-costing-cursor-rule installer for macOS / Linux / WSL
 # Author: Abdul Razzak (github.com/RazzakAnsari) - MIT licensed
 #
 # Remote (from your Angular project root):
-#   curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.sh | bash
 # Remote with flags:
-#   curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.sh | bash -s -- --dry-run
+#   curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.sh | bash -s -- --dry-run
 # Local (from a clone):
 #   bash <clone>/install.sh --target . --dry-run
 #
@@ -17,7 +17,7 @@
 
 set -euo pipefail
 
-TARBALL_URL="https://github.com/RazzakAnsari/minimize-cursor-cost-rule/archive/refs/heads/main.tar.gz"
+TARBALL_URL="https://github.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/archive/refs/heads/main.tar.gz"
 ALWAYS_ON="guardrails response-style tool-budget project-context"
 
 TARGET="${MCCR_TARGET:-$(pwd)}"
@@ -28,7 +28,7 @@ FORCE="${MCCR_FORCE:-0}"
 INDEXIGNORE="${MCCR_INDEXIGNORE:-0}"
 
 say() { printf '%s\n' "$*"; }
-fail() { printf 'minimize-cursor-cost-rule: %s\n' "$*" >&2; exit 1; }
+fail() { printf 'angular-minimizing-costing-cursor-rule: %s\n' "$*" >&2; exit 1; }
 usage() {
   say "Usage: install.sh [--target DIR] [--rules all|name,name] [--tool cursor|agents|claude|all]"
   say "                  [--index-ignore] [--dry-run] [--force]"
@@ -57,7 +57,7 @@ if [ ! -f "$TARGET/angular.json" ]; then
   if is_on "$FORCE"; then
     say "Warning: no angular.json in $TARGET - continuing because force is set."
   else
-    say "minimize-cursor-cost-rule: no angular.json in $TARGET."
+    say "angular-minimizing-costing-cursor-rule: no angular.json in $TARGET."
     say "Run this from your Angular project root, or use --force / MCCR_FORCE=1."
     exit 1
   fi
@@ -106,7 +106,7 @@ fi
 
 tag=""
 is_on "$DRYRUN" && tag="  (dry run - nothing is written)"
-say "minimize-cursor-cost-rule by Abdul Razzak -> $TARGET  [tool=$TOOL rules=$RULES]$tag"
+say "angular-minimizing-costing-cursor-rule by Abdul Razzak -> $TARGET  [tool=$TOOL rules=$RULES]$tag"
 
 n_new=0; n_replaced=0; n_kept=0
 place() {

@@ -1,4 +1,4 @@
-# minimize-cursor-cost-rule
+# angular-minimizing-costing-cursor-rule
 
 **Angular-focused AI rules by Abdul Razzak** that keep Cursor (and other AI
 coding tools) cheap, focused, and safe on real Angular codebases.
@@ -18,13 +18,13 @@ Open a terminal **in your Angular project root** (the folder with `angular.json`
 **Windows (PowerShell)**
 
 ```powershell
-irm https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1 | iex
 ```
 
 **macOS / Linux / WSL**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.sh | bash
 ```
 
 Then fill in `.cursor/rules/project-context.mdc` and start a **new** Cursor chat.
@@ -32,15 +32,15 @@ Then fill in `.cursor/rules/project-context.mdc` and start a **new** Cursor chat
 ### Preview first (nothing is written)
 
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.ps1))) -DryRun
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1))) -DryRun
 ```
 
 ```powershell
-$env:MCCR_DRYRUN = '1'; irm https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.ps1 | iex; Remove-Item Env:MCCR_DRYRUN
+$env:MCCR_DRYRUN = '1'; irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1 | iex; Remove-Item Env:MCCR_DRYRUN
 ```
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.sh | bash -s -- --dry-run
+curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.sh | bash -s -- --dry-run
 ```
 
 `irm ... | iex` cannot take switches, so use the `[scriptblock]::Create` form or
@@ -62,8 +62,8 @@ the environment variables below when you need options.
 Working from a clone instead of the web:
 
 ```powershell
-git clone https://github.com/RazzakAnsari/minimize-cursor-cost-rule
-& .\minimize-cursor-cost-rule\install.ps1 -Target C:\path\to\your-angular-app -DryRun
+git clone https://github.com/RazzakAnsari/angular-minimizing-costing-cursor-rule
+& .\angular-minimizing-costing-cursor-rule\install.ps1 -Target C:\path\to\your-angular-app -DryRun
 ```
 
 ---

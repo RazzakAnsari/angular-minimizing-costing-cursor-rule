@@ -1,10 +1,10 @@
-# minimize-cursor-cost-rule installer for Windows PowerShell 5.1+ and PowerShell 7+
+# angular-minimizing-costing-cursor-rule installer for Windows PowerShell 5.1+ and PowerShell 7+
 # Author: Abdul Razzak (github.com/RazzakAnsari) - MIT licensed
 #
 # Remote (from your Angular project root):
-#   irm https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.ps1 | iex
+#   irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1 | iex
 # Remote with switches:
-#   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/RazzakAnsari/minimize-cursor-cost-rule/main/install.ps1))) -DryRun
+#   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1))) -DryRun
 # Local (from a clone):
 #   & <clone>\install.ps1 -Target . -DryRun
 #
@@ -29,18 +29,18 @@ function Invoke-MccrInstall {
         [bool]$IndexIgnore, [bool]$DryRun, [bool]$Force, [string]$ScriptDir
     )
     $ErrorActionPreference = 'Stop'
-    $zipUrl = 'https://github.com/RazzakAnsari/minimize-cursor-cost-rule/archive/refs/heads/main.zip'
+    $zipUrl = 'https://github.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/archive/refs/heads/main.zip'
     $alwaysOn = @('guardrails', 'response-style', 'tool-budget', 'project-context')
 
     if (-not $Target) { $Target = (Get-Location).Path }
     if (-not $Rules)  { $Rules = 'all' }
     if (-not $Tool)   { $Tool = 'cursor' }
     if ($Tool -notin @('cursor', 'agents', 'claude', 'all')) {
-        Write-Host "minimize-cursor-cost-rule: unknown tool '$Tool' (use cursor, agents, claude or all)." -ForegroundColor Red
+        Write-Host "angular-minimizing-costing-cursor-rule: unknown tool '$Tool' (use cursor, agents, claude or all)." -ForegroundColor Red
         return
     }
     if (-not (Test-Path -LiteralPath $Target -PathType Container)) {
-        Write-Host "minimize-cursor-cost-rule: target folder not found: $Target" -ForegroundColor Red
+        Write-Host "angular-minimizing-costing-cursor-rule: target folder not found: $Target" -ForegroundColor Red
         return
     }
     $Target = (Resolve-Path -LiteralPath $Target).Path
@@ -49,7 +49,7 @@ function Invoke-MccrInstall {
         if ($Force) {
             Write-Host "Warning: no angular.json in $Target - continuing because Force is set." -ForegroundColor Yellow
         } else {
-            Write-Host "minimize-cursor-cost-rule: no angular.json in $Target." -ForegroundColor Yellow
+            Write-Host "angular-minimizing-costing-cursor-rule: no angular.json in $Target." -ForegroundColor Yellow
             Write-Host 'Run this from your Angular project root, or use -Force / MCCR_FORCE=1.' -ForegroundColor Yellow
             return
         }
@@ -95,7 +95,7 @@ function Invoke-MccrInstall {
         }
 
         $tag = if ($DryRun) { '  (dry run - nothing is written)' } else { '' }
-        Write-Host "minimize-cursor-cost-rule by Abdul Razzak -> $Target  [tool=$Tool rules=$Rules]$tag"
+        Write-Host "angular-minimizing-costing-cursor-rule by Abdul Razzak -> $Target  [tool=$Tool rules=$Rules]$tag"
 
         $stats = @{ new = 0; replaced = 0; kept = 0 }
         $place = {
@@ -133,7 +133,7 @@ function Invoke-MccrInstall {
             Write-Host 'Next: fill in .cursor/rules/project-context.mdc, then start a new Cursor chat.'
         }
     } catch {
-        Write-Host "minimize-cursor-cost-rule: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "angular-minimizing-costing-cursor-rule: $($_.Exception.Message)" -ForegroundColor Red
     } finally {
         if ($tempDir -and (Test-Path -LiteralPath $tempDir)) { Remove-Item -LiteralPath $tempDir -Recurse -Force }
     }
