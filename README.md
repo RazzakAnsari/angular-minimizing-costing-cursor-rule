@@ -29,6 +29,76 @@ curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-cos
 
 Then fill in `.cursor/rules/project-context.mdc` and start a **new** Cursor chat.
 
+The files are hidden from git automatically (see below), so nothing new shows
+up in Source Control and nothing ends up in your commits.
+
+---
+
+## Install once for all your Angular projects
+
+Open a terminal in the folder that holds your projects (for example `C:\code`)
+and run one command. It finds every folder with an `angular.json` underneath
+(git worktrees included, `node_modules`, `dist`, `bin`, `obj` and dot-folders
+skipped, 6 levels deep) and installs into each one, then prints a table.
+
+**Windows (PowerShell)**
+
+```powershell
+$env:MCCR_ALL = '1'; irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1 | iex; Remove-Item Env:MCCR_ALL
+```
+
+Or name the folder yourself:
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1))) -All -Root C:\code
+```
+
+**macOS / Linux / WSL**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.sh | bash -s -- --all --root ~/code
+```
+
+Cursor has no global folder for project rule files, so "once" means one command
+over the folder that holds your projects. Run the same command again after you
+clone or create a new project; projects that already have the kit are left as
+they are.
+
+## Invisible to git
+
+Inside a git repo the installer adds the exact files it wrote to that repo's
+`.git/info/exclude`, between these two lines:
+
+```
+# >>> angular-minimizing-costing-cursor-rule / >>>
+# <<< angular-minimizing-costing-cursor-rule / <<<
+```
+
+`info/exclude` works like `.gitignore` but lives only on your machine and is
+never committed. So `git status`, `git add -A`, and Cursor's Source Control
+panel do not see the kit, and your commits stay clean. Your `.gitignore` is never
+touched, and other files in `.cursor/` that your team commits keep working.
+
+- If git already tracks a file with the same name (say a team `PROMPTS.md`),
+  the installer leaves it alone and prints `tracked ... skipped`.
+- Want the team to commit the rules instead? Add `-Visible` (`MCCR_VISIBLE=1`,
+  `--visible`); the files are then left visible to git.
+
+## Is it installed?
+
+```powershell
+$env:MCCR_STATUS = '1'; irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1 | iex; Remove-Item Env:MCCR_STATUS
+```
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.sh | bash -s -- --status
+```
+
+You get one line per Angular project under the current folder: installed or
+not, how many rules, whether git can see them (`hidden`, `VISIBLE`, `committed`
+or `not git`), and the kit version. Each install also leaves a small marker,
+`.cursor/rules/.mccr-installed`, listing what it added (also hidden from git).
+
 ### Preview first (nothing is written)
 
 ```powershell
@@ -58,6 +128,12 @@ the environment variables below when you need options.
 | `-IndexIgnore`    | `--index-ignore`  | `MCCR_INDEXIGNORE=1`   | off      | Also add a `.cursorindexingignore` |
 | `-DryRun`         | `--dry-run`       | `MCCR_DRYRUN=1`        | off      | Print what would happen; write nothing |
 | `-Force`          | `--force`         | `MCCR_FORCE=1`         | off      | Replace existing files and allow a folder without `angular.json` |
+| `-All`            | `--all`           | `MCCR_ALL=1`           | off      | Install into every Angular project under the root |
+| `-Root <dir>`     | `--root <dir>`    | `MCCR_ROOT`            | current folder | Where `-All` and `-Status` look |
+| `-Depth <n>`      | `--depth <n>`     | `MCCR_DEPTH`           | `6`      | How many folder levels `-All` and `-Status` search |
+| `-Status`         | `--status`        | `MCCR_STATUS=1`        | off      | List the Angular projects under the root and whether the kit is in them |
+| `-Uninstall`      | `--uninstall`     | `MCCR_UNINSTALL=1`     | off      | Remove only what the installer added (with `-All`: in every project) |
+| `-Visible`        | `--visible`       | `MCCR_VISIBLE=1`       | off      | Do not hide the files from git |
 
 Working from a clone instead of the web:
 
@@ -88,6 +164,7 @@ git clone https://github.com/RazzakAnsari/angular-minimizing-costing-cursor-rule
 | `.cursor/rules/ts-style.mdc` | `*.ts` (on demand) | No `any`, types, aliases |
 | `PROMPTS.md` | you read it | Short, copy-paste prompts for common Angular tasks |
 | `AGENTS.md` / `CLAUDE.md` | with `-Tool agents/claude/all` | The same guidance as one file for other tools |
+| `.cursor/rules/.mccr-installed` | never | Marker: kit version, date, and the files the installer added |
 
 Pick one format per project. Loading `.cursor/rules` **and** `AGENTS.md` in
 Cursor sends the same guidance twice and costs you more.
@@ -95,8 +172,8 @@ Cursor sends the same guidance twice and costs you more.
 Repository layout:
 
 ```
-install.ps1          Windows installer (local or irm | iex)
-install.sh           macOS / Linux installer (local or curl | bash)
+install.ps1          Windows installer (local or irm | iex): install, -All, -Status, -Uninstall
+install.sh           macOS / Linux installer (local or curl | bash): same options
 kit/
   .cursor/rules/     the 14 rule files
   AGENTS.md
@@ -131,8 +208,11 @@ approval on and review diffs.
 - Stops if the folder has no `angular.json` (unless forced).
 - Keeps any file that already exists (unless forced) and prints every file it
   adds or keeps. Running it twice is harmless.
-- Writes only the files listed above. It never runs `npm`, `ng`, or `git`
-  and never edits your source code.
+- Never replaces a file that git already tracks.
+- Writes only the files listed above plus its own block in `.git/info/exclude`.
+  It runs only read-only git commands (`rev-parse`, `ls-files`, `status`,
+  `worktree list`), never runs `npm` or `ng`, never edits `.gitignore`, and
+  never edits your source code.
 - Remote runs download one archive of this repo to a temp folder and delete
   it afterwards. Read [`install.ps1`](install.ps1) / [`install.sh`](install.sh)
   before piping anything from the internet into your shell.
@@ -141,25 +221,30 @@ approval on and review diffs.
 
 ## Removing it
 
-Delete what the installer added:
+The uninstaller deletes only the files listed in the marker, and only if you
+have not changed them since (`-Force` removes changed ones too). It also removes
+its block from `.git/info/exclude`.
 
 ```powershell
-Remove-Item .cursor\rules\guardrails.mdc, .cursor\rules\response-style.mdc, .cursor\rules\tool-budget.mdc, .cursor\rules\project-context.mdc, .cursor\rules\ng-*.mdc, .cursor\rules\ts-style.mdc, PROMPTS.md
+$env:MCCR_UNINSTALL = '1'; irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1 | iex; Remove-Item Env:MCCR_UNINSTALL
+```
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.ps1))) -Uninstall -All
 ```
 
 ```bash
-rm -f .cursor/rules/{guardrails,response-style,tool-budget,project-context,ts-style}.mdc .cursor/rules/ng-*.mdc PROMPTS.md
+curl -fsSL https://raw.githubusercontent.com/RazzakAnsari/angular-minimizing-costing-cursor-rule/main/install.sh | bash -s -- --uninstall --all
 ```
-
-Also remove `AGENTS.md`, `CLAUDE.md`, or `.cursorindexingignore` if you installed them.
 
 ---
 
 ## Questions
 
 **Should the team commit these files?**
-Yes. Commit `.cursor/rules/` and `PROMPTS.md` to your Angular repo so everyone
-gets the same behaviour. Fill in `project-context.mdc` once.
+Your choice. By default they stay on your machine only, hidden from git. If you
+want everyone on the team to get the same rules, install with `-Visible` and
+commit `.cursor/rules/` and `PROMPTS.md`.
 
 **The assistant stopped running builds. How do I check my change?**
 It ends each change with the command to run. Run it yourself, or tell it
